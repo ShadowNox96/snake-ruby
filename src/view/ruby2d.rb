@@ -7,9 +7,7 @@ module View
             @pixel_size = 40    
         end
 
-        # Principal logistic
-        # state, contain all data to render the game 
-        def render(state)
+        def start(state)
             # DSL - domain specific language, specialiced in graphic apps.
             extend Ruby2D::DSL
             set(
@@ -17,10 +15,14 @@ module View
                 width: @pixel_size * state.grid.cols, 
                 height: @pixel_size * state.grid.rows
             )
+            show
+        end
 
+        # Principal logistic
+        # state, contain all data to render the game 
+        def render_elements(state)
             render_snake(state)
             render_food(state)
-            show
         end
 
         # Render figures
