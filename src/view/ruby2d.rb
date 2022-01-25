@@ -40,14 +40,17 @@ module View
         private
 
         def render_food(state)
+            @food.remove if @food
             food = state.food
-            render_square(food.row, food.col, 'yellow')
+            @food = render_square(food.row, food.col, 'yellow')
         end
 
         def render_snake(state)
+            # Delete last renders 
+            @snake_positions.each(&:remove) if @snake_positions
+            
             positions = state.snake.positions
-
-            positions.each do | item |
+            @snake_positions = positions.map do | item |
                 render_square(item.row, item.col, 'green')
             end
         end
